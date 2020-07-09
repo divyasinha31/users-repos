@@ -38,6 +38,7 @@ export class ListHeadComponent {
   onSearch() {
     const value = this.searchFC.value
     this.actionType.emit({ searchItem : value })
+    this.searchFC.reset()
   }
 
   onNext() {

@@ -1,10 +1,16 @@
 <div class="user-info-comp">
-  <div class="title">
+  <div class="title" *ngIf="!error">
     GitHub users are :
   </div>
 
-  <div *ngIf="error">
+  <div class="error" *ngIf="error">
     No such user found!!!
+
+    <div class="reload">
+      <button class="reload-btn" (click)="getUsers()">
+        Get All Users
+      </button>
+    </div>
   </div>
 
   <div class="list-head" *ngIf="!error">

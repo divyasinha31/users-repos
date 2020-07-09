@@ -1,18 +1,18 @@
 <div class="repos-of-user-comp">
+  <div class="error" *ngIf="error">
+    No such repository exists for {{ userId }}.
+  </div>
+
   <div class="title" *ngIf="userId">
     GitHub repositories of {{ userId }} are :
   </div>
 
-  <div class="error" *ngIf="error">
-    No such repository exists.
-  </div>
-
-  <div class="list-head" *ngIf="!error">
+  <div class="list-head">
     <app-list-head [params]="listHeadParam" (actionType)="getDataForAction($event)">
     </app-list-head>
   </div>
 
-  <div class="table" *ngIf="repos && !error">
+  <div class="table" *ngIf="repos">
     <div class="table-header">
       <div class="name">
         Repo Name

@@ -30,6 +30,7 @@ export class UserInfoComponent implements OnInit {
   constructor(private urServ : UsersReposService,
               private router : Router) { }
 
+  // ------- Angular Functions --------
   ngOnInit() : void {
     this.listHeadParam = {
       searchPlaceHolder : 'Search User...',
@@ -41,22 +42,7 @@ export class UserInfoComponent implements OnInit {
     this.getUsers()
   }
 
-  private getUsers(startFrom : number = 0) {
-    const params : GetUsers.params = {
-      countFrom : startFrom,
-      perPage   : 50
-    }
-
-    this.listHeadParam = {...this.listHeadParam}
-    this.listHeadParam.currentCount = startFrom
-    this.listHeadParam.isFirst = startFrom === 0
-
-    this.urServ.getUsers(params)
-      .subscribe((data : any) => {
-        this.users = data
-      })
-  }
-
+  // ------- Private Functions --------
   private searchUser(searchItem : string) {
     const params : SearchUser.params = {
       userId : searchItem
@@ -72,6 +58,25 @@ export class UserInfoComponent implements OnInit {
       (error : any) => {
         this.error = true
       })
+  }
+
+  // ------- HTML Functions --------
+  getUsers(startFrom : number = 0) {
+    const params : GetUsers.params = {
+      countFrom : startFrom,
+      perPage   : 50
+    }
+
+    this.listHeadParam = {...this.listHeadParam}
+    this.listHeadParam.currentCount = startFrom
+    this.listHeadParam.isFirst = startFrom === 0
+
+    this.urServ.getUsers(params)
+      .subscribe((data : any) => {
+        this.users = data
+      })
+
+    this.error = false
   }
 
   getDataForAction(event : ListHeadOutput) {

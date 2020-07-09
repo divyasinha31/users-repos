@@ -41,6 +41,7 @@ export class ReposOfUserComponent implements OnInit {
     })
   }
 
+  // ------- Angular Functions --------
   ngOnInit() : void {
     this.listHeadParam = {
       searchPlaceHolder : 'Search Repo...',
@@ -52,6 +53,7 @@ export class ReposOfUserComponent implements OnInit {
     this.getRepos()
   }
 
+  // ------- Private Functions --------
   private async getRepos(startFrom : number = 0) {
     const params : GetRepos.params = {
       repoUrl : this.repoUrl
@@ -73,18 +75,23 @@ export class ReposOfUserComponent implements OnInit {
       repoName  : searchItem
     }
 
+    const oldData = this.repos
+
     this.repos        = [...this.repos]
     this.repos.length = 0
 
     this.urServ.searchRepo(params)
       .subscribe((data : any) => {
         this.repos.push(data)
+        this.error = false
       },
       (error : any) => {
         this.error = true
+        this.repos = oldData
       })
   }
 
+  // ------- HTML Functions --------
   getDataForAction(event : ListHeadOutput) {
     if (event.searchItem) {
       this.searchRepo(event.searchItem)

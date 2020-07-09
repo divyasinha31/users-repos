@@ -1,0 +1,38 @@
+<div class="user-info-comp">
+  <div class="title">
+    GitHub users are :
+  </div>
+
+  <div *ngIf="error">
+    No such user found!!!
+  </div>
+
+  <div class="list-head" *ngIf="!error">
+    <app-list-head [params]="listHeadParam" (actionType)="getDataForAction($event)">
+    </app-list-head>
+  </div>
+
+  <div class="table" *ngIf="users && !error">
+    <div class="table-header">
+      <div class="name">
+        GitHub User Name
+      </div>
+
+      <div class="profile-url">
+        Profile URL
+      </div>
+    </div>
+
+    <div class="table-columns">
+      <div class="user" *ngFor="let user of users; let i=index" [ngClass]="{'odd' : i % 2 === 1}">
+        <div class="name" (click)="getReposForUser(user)">
+          {{ user.login }}
+        </div>
+
+        <div class="profile-url">
+          {{ user.url }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

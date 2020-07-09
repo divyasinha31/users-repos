@@ -1,0 +1,25 @@
+<div class="list-head-comp">
+  <div class="search">
+    <input placeholder="{{ params.searchPlaceHolder }}" class="input-container" [formControl]="searchFC">
+
+    <button class="btn" (click)="onSearch()">Search</button>
+  </div>
+
+  <div class="next-prev">
+    <div class="prev-text" *ngIf="!params.isFirst">
+      Previous
+    </div>
+
+    <div class="prev-btn" (click)="onPrevious()" *ngIf="!params.isFirst">
+      &lt;
+    </div>
+
+    <div class="next-btn" (click)="onNext()" *ngIf="!params.isLast">
+      &gt;
+    </div>
+
+    <div class="next-text" *ngIf="!params.isLast">
+      Next
+    </div>
+  </div>
+</div>
